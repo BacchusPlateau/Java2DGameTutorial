@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,11 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     KeyHandler keyHandler = new KeyHandler();
     Player player = new Player(this, keyHandler);
-
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
-
+    TileManager tileManager = new TileManager(this);
 
     public GamePanel() {
 
@@ -81,6 +78,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
+        //tiles first
+        tileManager.draw(g2);
+
+        //player is drawn on top of tiles
         player.draw(g2);
 
         g2.dispose();
